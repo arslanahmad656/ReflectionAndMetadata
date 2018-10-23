@@ -9,7 +9,7 @@ namespace ReflectionExamples
     class StringCollection
     {
         private List<string> data;
-        public int Count { get; private set; }
+        public int Count { get; private set; } = 0;
 
         public const int initialCapacity = 5;  // implicitly static
 
@@ -26,6 +26,7 @@ namespace ReflectionExamples
         public void AddString(string str)
         {
             data.Add(str);
+            ++Count;
         }
 
         public string this[int i]
