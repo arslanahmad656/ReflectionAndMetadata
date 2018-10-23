@@ -11,7 +11,8 @@ namespace ReflectionExamples
         static void Main(string[] args)
         {
             //Basics.Run();
-            new InstantiatingTypes().Run();
+            //new InstantiatingTypes().Run();
+            InvokingMembers.Run();
 
             Console.ReadKey();
         }

@@ -45,9 +45,11 @@
   <ItemGroup>
     <Compile Include="Basics.cs" />
     <Compile Include="InstantiatingTypes.cs" />
+    <Compile Include="InvokingMembers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectingMembers.cs" />
+    <Compile Include="StringCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
