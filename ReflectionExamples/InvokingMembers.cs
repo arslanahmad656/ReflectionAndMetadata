@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,29 @@ namespace ReflectionExamples
             //DemoProperty();
             //DemoAccessor();
             //DemoRefType();
-            DemoGeneric();
+            //DemoGeneric();
+            DemoInterface();
+        }
+
+        static void DemoInterface()
+        {
+            var list = new List<object>
+            {
+                "Arslan",
+                "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z".Where(c => c > 70),
+                new StringBuilder("dsfdsfs"),
+                new object(),
+                new List<object>()
+                {
+                    new List<int>
+                    {
+                        1, 2, 3, 4, 5
+                    }
+                }
+            };
+
+            var res = list.ToStringEx();
+            Console.WriteLine($"Result: {res}");
         }
 
         static void DemoFields()
@@ -160,6 +183,50 @@ namespace ReflectionExamples
                 returnValue = ((string, int))closed.Invoke(null, new object[] { "some string", 12 });
             }
             Console.WriteLine($"Return value: ({returnValue.t1}, {returnValue.t2})");
+        }
+
+        public static String ToStringEx(this object value)
+        {
+            if(value == null)
+            {
+                return "<null>";
+            }
+
+            if(value.GetType().IsPrimitive)
+            {
+                return value.ToString();
+            }
+
+            var sb = new StringBuilder();
+            if(value is IList)
+            {
+                sb.Append($"List of {(value as IList).Count} items: ");    
+            }
+
+            var closeTypeIGrouping = value.GetType().GetInterfaces()
+                .Where(type => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IGrouping<,>))
+                .FirstOrDefault();
+            if(closeTypeIGrouping != null)
+            {
+                var keyProp = closeTypeIGrouping.GetProperty("Key");
+                sb.Append($"Group with key: {keyProp.GetValue(value)}");
+            }
+
+            if(value is IEnumerable)
+            {
+                foreach (object obj in ((IEnumerable)value))
+                {
+                    //sb.Append($"{ToStringEx(obj)}  ");
+                    sb.Append($"{obj.ToStringEx()}  ");
+                }
+            }
+
+            if(sb.Length == 0)
+            {
+                sb.Append(value.ToString());
+            }
+
+            return $"\r\n{sb.ToString()}";
         }
 
         static void InitSample(out StringCollection sample)
