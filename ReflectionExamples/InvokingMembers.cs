@@ -17,7 +17,8 @@ namespace ReflectionExamples
             //DemoFields();
             //DemoInstanceMethods();
             //DemoProperty();
-            DemoAccessor();
+            //DemoAccessor();
+            DemoRefType();
         }
 
         static void DemoFields()
@@ -119,6 +120,16 @@ namespace ReflectionExamples
                 Console.WriteLine($" {ex.GetType().Name}; {ex.Message}");
             }
             Console.WriteLine($" Value: {indexer.GetValue(s, new object[] { 0 })}");
+        }
+
+        static void DemoRefType()
+        {
+            // invoking int.TryParse("23", int out x) dynamically
+            var @params = new[] { typeof(string), typeof(int).MakeByRefType() };
+            var args = new object[] { "23", 0 };
+            var method = typeof(int).GetMethod("TryParse", @params);
+            var result = method.Invoke(null, args);
+            Console.WriteLine($"Parsed: {result}; value: {args[1]}");
         }
 
         static void InitSample(out StringCollection sample)
