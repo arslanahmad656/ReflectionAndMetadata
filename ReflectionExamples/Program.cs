@@ -12,7 +12,8 @@ namespace ReflectionExamples
         {
             //Basics.Run();
             //new InstantiatingTypes().Run();
-            InvokingMembers.Run();
+            //InvokingMembers.Run();
+            ReflectingAssemblies.Run();
 
             Console.ReadKey();
         }
