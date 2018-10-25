@@ -12,13 +12,19 @@ namespace ReflectionExamples
         // Following types are to be demonstrated
         // static fields, instance methods, property, indexer, and miscs
 
+        static (T1, T2) Echo<T1, T2>(T1 t1, T2 t2)
+        {
+            return (t1, t2);
+        }
+
         public static void Run()
         {
             //DemoFields();
             //DemoInstanceMethods();
             //DemoProperty();
             //DemoAccessor();
-            DemoRefType();
+            //DemoRefType();
+            DemoGeneric();
         }
 
         static void DemoFields()
@@ -130,6 +136,30 @@ namespace ReflectionExamples
             var method = typeof(int).GetMethod("TryParse", @params);
             var result = method.Invoke(null, args);
             Console.WriteLine($"Parsed: {result}; value: {args[1]}");
+        }
+
+        static void DemoGeneric()
+        {
+            var method = typeof(InvokingMembers).GetMethod("Echo", BindingFlags.NonPublic | BindingFlags.Static);
+            Console.WriteLine($"Is Generic Method: {method.IsGenericMethod}");
+            Console.WriteLine($"Contains Generic Parmeters: {method.ContainsGenericParameters}");
+            (string t1, int t2) returnValue;
+            try
+            {
+                Console.WriteLine("Trying to invoke the generic method...");
+                returnValue = ((string, int))method.Invoke(null, new object[] { "some string", 12 });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error! Could not invoke. {ex.GetType().Name}; {ex.Message}");
+                Console.WriteLine("Making closed type");
+                var closed = method.MakeGenericMethod(typeof(string), typeof(int));
+                Console.WriteLine($"Is Generic Method: {closed.IsGenericMethod}");
+                Console.WriteLine($"Contains Generic Parmeters: {closed.ContainsGenericParameters}");
+                Console.WriteLine("Invoke the closed method...");
+                returnValue = ((string, int))closed.Invoke(null, new object[] { "some string", 12 });
+            }
+            Console.WriteLine($"Return value: ({returnValue.t1}, {returnValue.t2})");
         }
 
         static void InitSample(out StringCollection sample)
