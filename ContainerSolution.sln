@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{3D00E210-E829-475D-A002-3F61660304EE}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{C27C4DBE-790E-48F8-A2F4-80885217F613}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionExamples", "ReflectionExamples\ReflectionExamples.csproj", "{6BBC5273-28F0-4E24-B2FF-C75845A4DC20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityExamples", "SecurityExamples\SecurityExamples.csproj", "{2CA4E451-952B-4FF0-995D-AA3063D81A31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{6BBC5273-28F0-4E24-B2FF-C75845A4DC20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BBC5273-28F0-4E24-B2FF-C75845A4DC20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BBC5273-28F0-4E24-B2FF-C75845A4DC20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA4E451-952B-4FF0-995D-AA3063D81A31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA4E451-952B-4FF0-995D-AA3063D81A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA4E451-952B-4FF0-995D-AA3063D81A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA4E451-952B-4FF0-995D-AA3063D81A31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4BDDA90B-8B4D-45CC-B122-4FB1247D13F5}
 	EndGlobalSection
 EndGlobal
