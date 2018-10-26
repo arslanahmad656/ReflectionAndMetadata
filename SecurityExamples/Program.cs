@@ -10,6 +10,10 @@ namespace SecurityExamples
     {
         static void Main(string[] args)
         {
+            PermissionsBasicExamples.Run();
+
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }
