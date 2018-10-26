@@ -17,7 +17,9 @@ namespace SecurityExamples
         {
             //DemoImpersonatingThread();
             //DemoImpersonatingApp();
-            DemoGettingPermissions();
+            //DemoGettingPermissions();
+            //DemoDemandingDeclaratively();
+            DemoCreatingIdentityAndPrincipals();
         }
 
         static void DemoGettingPermissions()
@@ -66,6 +68,34 @@ namespace SecurityExamples
             WriteLine("Current Thread's Principal's primary identity: {0}", string.IsNullOrEmpty(principal.Identity.Name) ? "<NA>" : principal.Identity.Name);
             currentPrincipal = WindowsPrincipal.Current;
             WriteLine($"Current Windows Principal: {currentPrincipal.Identity.Name}");
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Role = "administrators")]
+        static void MethodWithPrincipalPermissionAttribute()
+        {
+            WriteLine("You are executing as admin.");
+        }
+
+        static void DemoDemandingDeclaratively()
+        {
+            Thread.CurrentPrincipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            try
+            {
+                MethodWithPrincipalPermissionAttribute();
+            }
+
+            catch (SecurityException ex)
+            {
+                WriteLine($"Could not get the administrative access. Trying running as administrator. Details: {ex.Message}");
+            }
+        }
+
+        static void DemoCreatingIdentityAndPrincipals()
+        {
+            var identity = new GenericIdentity("Some Name");
+            var principal = new GenericPrincipal(identity, new[] { "administrators" });
+            Thread.CurrentPrincipal = principal;
+            WriteLine($"Thread executing as identity of {Thread.CurrentPrincipal.Identity.Name}");
         }
     }
 }
