@@ -10,7 +10,8 @@ namespace SecurityExamples
     {
         static void Main(string[] args)
         {
-            PermissionsBasicExamples.Run();
+            //PermissionsBasicExamples.Run();
+            HashingDemos.Run();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
